@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div class="header">
+	<div class="header a">
 		<h2>Register</h2>
 	</div>
 
