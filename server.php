@@ -11,12 +11,15 @@ if (isset($_POST['reg_user'])) {
 
 	$email	    = mysqli_real_escape_string($db, $_POST['email']);
 	$password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
-
+	// PAFvP4zpPj_2(r~k
 	// checking filled
 
 
 	if (empty($email)) {
 		array_push($errors, "-Email is required");
+	}
+	if (empty($password_1)) {
+		array_push($errors, "-Password is required");
 	}
 
 

@@ -14,11 +14,11 @@
 		<?php include('errors.php') ?>
 		<div class="input-group">
 			<label>Email</label>
-			<input type="email" name="email" value="<?php echo $email; ?>">
+			<input type="email"  maxlength="30" name="email" value="<?php echo $email; ?>">
 		</div>
 		<div class="input-group">
 			<label>Password</label>
-			<input type="password" name="password_1">
+			<input type="password"  maxlength="30" name="password_1">
 		</div>
 
 		<div class="input-group">
