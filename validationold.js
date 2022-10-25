@@ -1,43 +1,33 @@
-const form = document.getElementById('form')
-const input = document.querySelectorAll('#form input')
-
-
-
-
-
-const validate = (e) =>{
-    console.log(e.target.name)
-    switch(e.target.name){
-        case "nombre":
-            
-        break;
-        case "apellidos":
-            
-        break;
-        case "dni":
-            
-        break;
-        case "telefono":
-            
-        break;
-        case "email":
-            
-        break;
-        case "password":
-            
-        break;
-        case "idioma":
-            
-        break;
-    }
-}
-
-input.forEach((input)=>{
-    input.addEventListener('keyup',validate)
-    input.addEventListener('blur',validate)
-})
-
-form.addEventListener('submit', (e) =>{
-    e.preventDefault();
-
-})
+$(document).ready(function () {  
+  $('#password').keyup(function () {  
+      $('#strengthMessage').html(checkStrength($('#password').val()))  
+  })  
+  function checkStrength(password) {  
+      var strength = 0  
+      if (password.length < 6) {  
+          alert("corto")
+          return 'Too short'  
+      }  
+      if (password.length > 7) strength += 1  
+      // If password contains both lower and uppercase characters, increase strength value.  
+      if (password.match(/([a-z].*[A-Z])|([A-Z].*[a-z])/)) strength += 1  
+      // If it has numbers and characters, increase strength value.  
+      if (password.match(/([a-zA-Z])/) && password.match(/([0-9])/)) strength += 1  
+      // If it has one special character, increase strength value.  
+      if (password.match(/([!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1  
+      // If it has two special characters, increase strength value.  
+      if (password.match(/(.*[!,%,&,@,#,$,^,*,?,_,~].*[!,%,&,@,#,$,^,*,?,_,~])/)) strength += 1  
+      // Calculated strength value, we can return messages  
+      // If value is less than 2  
+      if (strength < 2) {  
+          alert("alert")  
+          return 'Weak'  
+      } else if (strength == 2) {  
+          alert("bueno")  
+          return 'Good'  
+      } else {  
+          alert("strong")
+          return 'Strong'  
+      }  
+  }  
+});  

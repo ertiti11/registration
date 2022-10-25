@@ -11,8 +11,6 @@ $errors   = array();
 
 
 if (isset($_POST['reg_user'])) {
-
-
 	$nombre = $_POST['nombre'];
 	$apellidos = $_POST['apellidos'];
 	$dni = $_POST['dni'];
@@ -52,20 +50,26 @@ if (isset($_POST['reg_user'])) {
 
 
 
-	
+	try{
+		$stmt = $connect->prepare("SELECT * FROM datos WHERE email=:email LIMIT 1");
+		$stmt->execute(array(
+			':email' => $email,
+			));	
+		if( $stmt->rowCount() > 0 )  {
+			
+			array_push($errors, "El usuario ya ha sido registrado");
+				
+			}
+		
+	}catch(PDOException $e){
+		echo $e->getMessage();
+	}
 
-	// $user_check_query = "SELECT * FROM datos WHERE EMAIL='$email' LIMIT 1";
-	// $result = mysqli_query($db, $user_check_query);
-	// $user = mysqli_fetch_assoc($result);
 
-	// Checking user in database
-	// if ($user) {
-	// 	if ($user['email'] === $email) {
-	// 		array_push($errors, "Email already exists");
-	// 	}
-	// }
+	//Checking user in database
 
-	echo "Total error: " . count($errors);
+
+	// echo "Total error: " . count($errors);
 
 
 	// Insert New Data
@@ -84,7 +88,7 @@ if (isset($_POST['reg_user'])) {
 
 
 				));
-			$_SESSION['success']  = "Te has suscrito correctamente";
+			$_SESSION['success']  = "Gracias por registrarte en nuestra plataforma. En breve nos pondremos en contacto con contigo mediante correo electrónico.";
 			header('location: index.php');
 			exit;
 		}
