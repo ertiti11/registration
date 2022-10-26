@@ -43,7 +43,7 @@
                         <label class="form-label" for="form3Example1q">DNI/NIE</label>
                       </div>
                       <div class="form-outline mb-4">
-                        <input type="text" id="form3Example1q" name="telefono" class="form-control" required/>
+                        <input type="number" pattern="(\+34|0034|34)?[ -]*(8|9)[ -]*([0-9][ -]*){8}" id="form3Example1q" name="telefono" class="form-control" required/>
                         <label class="form-label" for="form3Example1q">Teléfono</label>
                       </div>
                       <div class="form-outline mb-4">

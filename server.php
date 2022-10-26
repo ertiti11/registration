@@ -69,9 +69,6 @@ if (isset($_POST['reg_user'])) {
 	//Checking user in database
 
 
-	// echo "Total error: " . count($errors);
-
-
 	// Insert New Data
 
 	if (count($errors) == 0) {
@@ -85,8 +82,6 @@ if (isset($_POST['reg_user'])) {
 				':email' => $email,
 				':password' => $password,
 				':idioma' => $idioma,
-
-
 				));
 			$_SESSION['success']  = "Gracias por registrarte en nuestra plataforma. En breve nos pondremos en contacto con contigo mediante correo electrónico.";
 			header('location: index.php');
@@ -95,40 +90,51 @@ if (isset($_POST['reg_user'])) {
 		catch(PDOException $e) {
 			echo $e->getMessage();
 		}
-	}
-
-
-
-
-	
+	}	
 }
 
-// // Click Login
-// if (isset($_POST['login_user'])) {
-// 	$username = mysqli_real_escape_string($db, $_POST['email']);
-// 	$password = mysqli_real_escape_string($db, $_POST['password']);
 
-// 	if (empty($username)) {
-// 		array_push($errors, "Username is required");
-// 	}
 
-// 	if (empty($password)) {
-// 		array_push($errors, "Password is required");
-// 	}
 
-// 	if (count($errors) == 0) {
-// 		$password = $password;
+// Click Login
+if (isset($_POST['login_user'])) {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	if (empty($email)) {
+		array_push($errors, "Email is required");}
 
-// 		$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-// 		$results = mysqli_query($db, $query);
-// 		if (mysqli_num_rows($results) == 1) {
-// 			$_SESSION['username'] = $username;
-// 			$_SESSION['success']  = "You are now logged in";
-// 			header('location: index.php');
-// 		} else {
-// 			array_push($errors, "Wrong username/password combination");
-// 		}
-// 	}
-// }
+	if (empty($password)) {
+		array_push($errors, "Password is required");}
+
+	if (count($errors) == 0) {
+
+		try{
+			$stmt = $connect->prepare("SELECT * FROM datos WHERE email=:email AND password=:password");
+			$stmt->execute(array(
+				':email' => $email,
+				':password' => $password
+				));	
+			  if($stmt->rowCount() == 1){
+
+				
+				$_SESSION['username'] = $email;
+				$_SESSION['success']  = "You are now logged in";
+				$_SESSION['token']  = "kjhd23·$5Dgs_;5%3$";
+				header('location: mostrar.php');
+				return True;
+					
+				}else{
+					array_push($errors, "El email o la contraseña es incorrecta");
+				}
+			
+		}catch(PDOException $e){
+			echo $e->getMessage();
+		}
+
+
+
+
+	}
+}
 
 ?>
