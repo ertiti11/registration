@@ -109,7 +109,7 @@ if (isset($_POST['login_user'])) {
 	if (count($errors) == 0) {
 
 		try{
-			$stmt = $connect->prepare("SELECT * FROM datos WHERE email=:email AND password=:password");
+			$stmt = $connect->prepare("SELECT * FROM users WHERE user=:email AND password=:password");
 			$stmt->execute(array(
 				':email' => $email,
 				':password' => $password
@@ -124,7 +124,9 @@ if (isset($_POST['login_user'])) {
 				return True;
 					
 				}else{
+					header('location: login.php');
 					array_push($errors, "El email o la contraseña es incorrecta");
+					
 				}
 			
 		}catch(PDOException $e){

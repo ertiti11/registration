@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-<section class="h-100 h-custom" style="background-color: #f2f2f2;">
+<section class="h-100 h-custom">
 	
 	<h1>Panel de Administración de usuarios registrados</h1>
         <div class="container py-5 h-100">
@@ -34,7 +34,7 @@
       
                    
                       <div class="form-outline mb-4">
-                        <input type="email" id="form3Example1q" name="email" class="form-control" required/>
+                        <input type="text" id="form3Example1q" name="email" class="form-control" required/>
                         <label class="form-label" for="form3Example1q">Email</label>
                       </div>
                       <div class="form-outline mb-4">
